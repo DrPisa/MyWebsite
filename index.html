@@ -52,14 +52,14 @@ header p {
 /* ===== Intro Section ===== */
 .intro {
     text-align: center;
-    margin: 0.5rem auto 2rem auto; /* slightly higher above biomes */
+    margin: 0.5rem auto 2rem auto;
     max-width: 720px;
     font-size: 1.6rem;
     font-weight: bold;
     line-height: 1.6;
     color: #FFD700;
     text-shadow: var(--text-shadow);
-    background: rgba(0,0,0,0.3); /* subtle card background */
+    background: rgba(0,0,0,0.3);
     padding: 20px 25px;
     border-radius: 12px;
     box-shadow: 2px 2px 0 #000;
@@ -67,36 +67,18 @@ header p {
 
 /* ===== Biomes Section ===== */
 .biomes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-    gap: 20px;
-    padding: 2rem 1rem;
+    display: none; /* This line hides the biomes section */
 }
-.biome {
-    background: #8FBC8F;
-    border: 3px solid #000;
-    padding: 1.2rem;
-    text-align: center;
-    box-shadow: var(--button-shadow);
-    cursor: pointer;
-    transition: transform 0.3s, background 0.3s;
-}
-.biome:hover { 
-    transform: translateY(-5px); 
-    background: #98FB98;
-}
-.biome h3 { margin-bottom: 0.5rem; }
 
 /* ===== Body Themes ===== */
-body.forest { background: linear-gradient(to bottom, #228B22 0%, #006400 70%); }
-body.desert { background: linear-gradient(to bottom, #EDC9AF 0%, #C2B280 70%); }
-body.ocean  { background: linear-gradient(to bottom, #1E90FF 0%, #000080 70%); }
-body.sky    { background: linear-gradient(to bottom, #87CEEB 0%, #E0FFFF 70%); }
+body {
+    background: linear-gradient(to bottom, #00BFFF 0%, #32CD32 70%);
+}
 
-/* ===== Discord Button Below Biomes ===== */
-.discord-btn {
-    display: block;
-    margin: 40px auto 60px auto; /* below biome list with space above & below */
+/* ===== Discord & Events Card Styles ===== */
+.discord-btn, .minecraft-btn {
+    display: inline-block;
+    margin: 0 auto;
     background: #5865F2;
     color: #fff;
     font-family: 'Minecraft', sans-serif;
@@ -109,9 +91,61 @@ body.sky    { background: linear-gradient(to bottom, #87CEEB 0%, #E0FFFF 70%); }
     transition: all 0.2s ease;
     text-align: center;
 }
-.discord-btn:hover {
+.minecraft-btn {
+    background: #FFD700;
+    color: #000;
+    text-shadow: 1px 1px 0 #fff;
+}
+.minecraft-btn:hover {
     transform: translateY(-3px);
     box-shadow: 2px 2px 0 #000;
+    background: #FFEA00;
+}
+.events-card, .discord-card {
+    border: 4px solid #000;
+    box-shadow: var(--button-shadow);
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+    animation: fadeIn 0.5s forwards;
+}
+.events-card {
+    background: #FFD700;
+    color: #000;
+}
+.discord-card {
+    background: #5865F2;
+}
+.events-card h3, .discord-card h3 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: var(--text-shadow);
+}
+.events-card p, .discord-card p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 0 #000;
+}
+.events-card .minecraft-btn, .discord-card .discord-btn {
+    font-size: 1.4rem;
+    padding: 0.8rem 2rem;
+}
+
+/* ===== Cards Flex Container ===== */
+.cards-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 2rem 1rem;
+}
+.events-card, .discord-card {
+    margin: 0;
+    flex: 1 1 300px;
+    max-width: 500px;
 }
 
 /* ===== Footer ===== */
@@ -146,12 +180,16 @@ footer {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
 }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     header h1 { font-size: 3rem; }
     header p { font-size: 1.2rem; }
-    .discord-btn { font-size: 1.4rem; padding: 0.8rem 2rem; }
+    .discord-btn, .minecraft-btn { font-size: 1.4rem; padding: 0.8rem 2rem; }
     .intro { font-size: 1.4rem; line-height: 1.5; padding: 15px 20px; }
 }
 </style>
@@ -168,15 +206,21 @@ footer {
         <p>Hi there! I’m a medical student, a web developer-in-training, and a Minecraft adventurer. I love experimenting with some codes, also learning new tricks on minecraft, and sharing epic adventures!</p>
     </section>
 
-    <section class="biomes">
-        <div class="biome" data-biome="forest"><h3>🌲 Forest</h3>Click to explore lush greenery</div>
-        <div class="biome" data-biome="desert"><h3>🏜️ Desert</h3>Click to enter sandy lands</div>
-        <div class="biome" data-biome="ocean"><h3>🌊 Ocean</h3>Click to dive into deep waters</div>
-        <div class="biome" data-biome="sky"><h3>☁️ Sky</h3>Click to soar into the clouds</div>
-    </section>
+    <div class="cards-container">
+        <!-- Events Card -->
+        <div id="events-card" class="events-card">
+            <h3>Events and Posts Coming Soon!!</h3>
+            <p>Stay up to date with the latest community events and posts!</p>
+            <a href="events.html" class="minecraft-btn">View Now</a>
+        </div>
 
-    <!-- Discord button below the biome list -->
-    <a class="discord-btn" href="#">Coming Soon</a>
+        <!-- Discord Card -->
+        <div id="discord-card" class="discord-card">
+            <h3>Discord Invite Coming Soon!!</h3>
+            <p>Hop on over to Discord to chat with Pisa and other adventurers.</p>
+            <a href="YOUR_DISCORD_INVITE_LINK_HERE" class="discord-btn" target="_blank">Join the Discord!</a>
+        </div>
+    </div>
 </main>
 
 <footer>
@@ -196,13 +240,6 @@ for(let i=0;i<sparkleCount;i++){
     sparkle.style.animationDuration = `${Math.random()*3+2}s`;
     document.body.appendChild(sparkle);
 }
-
-// ===== Biome Switching =====
-document.querySelectorAll('.biome').forEach(b => {
-    b.addEventListener('click', () => {
-        document.body.className = b.dataset.biome;
-    });
-});
 </script>
 
 </body>
