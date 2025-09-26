@@ -65,20 +65,20 @@ header p {
     box-shadow: 2px 2px 0 #000;
 }
 
-/* ===== Biomes Section ===== */
+/* ===== Biomes Section (Kept hidden) ===== */
 .biomes {
-    display: none; /* This line hides the biomes section */
+    display: none;
 }
 
-/* ===== Body Themes ===== */
+/* ===== Body Themes (Kept) ===== */
 body {
     background: linear-gradient(to bottom, #00BFFF 0%, #32CD32 70%);
 }
 
-/* ===== Discord & Events Card Styles ===== */
-.discord-btn, .minecraft-btn {
+/* ===== Discord Card & Button Styles (Adjusted for single card) ===== */
+.discord-btn {
     display: inline-block;
-    margin: 0 auto;
+    /* Removed margin: 0 auto; as the card now handles centering */
     background: #5865F2;
     color: #fff;
     font-family: 'Minecraft', sans-serif;
@@ -90,18 +90,22 @@ body {
     text-decoration: none;
     transition: all 0.2s ease;
     text-align: center;
+    /* Make the button full width of the card's content area on smaller screens */
+    width: 100%;
+    max-width: 350px; /* Limit button width on large screens */
 }
-.minecraft-btn {
+.minecraft-btn { /* Kept for reference, though unused */
     background: #FFD700;
     color: #000;
     text-shadow: 1px 1px 0 #fff;
 }
-.minecraft-btn:hover {
+.minecraft-btn:hover { /* Kept for reference, though unused */
     transform: translateY(-3px);
     box-shadow: 2px 2px 0 #000;
     background: #FFEA00;
 }
-.events-card, .discord-card {
+
+.discord-card {
     border: 4px solid #000;
     box-shadow: var(--button-shadow);
     color: #fff;
@@ -110,13 +114,16 @@ body {
     border-radius: 12px;
     transition: transform 0.3s ease;
     animation: fadeIn 0.5s forwards;
+    background: #5865F2; /* Kept background */
+    /* Adjustments for longer/wider and centered appearance */
+    max-width: 700px; /* Increased max-width for "longer" appearance */
+    flex: 1 1 100%; /* Make it take up the available space in the container */
+    margin: 0 auto; /* Ensure it's centered within the flex container's item space */
 }
-.events-card {
+
+.events-card { /* Kept the style for completeness, but it's now unused */
     background: #FFD700;
     color: #000;
-}
-.discord-card {
-    background: #5865F2;
 }
 .events-card h3, .discord-card h3 {
     font-size: 2rem;
@@ -128,27 +135,27 @@ body {
     margin-bottom: 1.5rem;
     text-shadow: 1px 1px 0 #000;
 }
-.events-card .minecraft-btn, .discord-card .discord-btn {
-    font-size: 1.4rem;
-    padding: 0.8rem 2rem;
+.discord-card .discord-btn {
+    font-size: 1.8rem; /* Reverting to larger button size */
+    padding: 1rem 2.5rem; /* Reverting to larger padding */
+    display: block; /* Make the button a block element */
+    margin: 1.5rem auto 0 auto; /* Center the button within the card and add top margin */
 }
 
-/* ===== Cards Flex Container ===== */
+/* ===== Cards Flex Container (Adjusted for centering a single item) ===== */
 .cards-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 30px;
+    justify-content: center; /* Center the card horizontally */
+    align-items: center; /* Center the card vertically if needed (less critical here) */
+    gap: 30px; /* Gap is less relevant now, but kept */
     flex-wrap: wrap;
     padding: 2rem 1rem;
+    width: 100%; /* Ensure container uses full width */
 }
-.events-card, .discord-card {
-    margin: 0;
-    flex: 1 1 300px;
-    max-width: 500px;
-}
+/* Removed individual card flex styles as they are now handled by .discord-card */
 
-/* ===== Footer ===== */
+
+/* ===== Footer (Kept) ===== */
 footer {
     text-align: center;
     padding: 1.5rem;
@@ -159,7 +166,7 @@ footer {
     text-shadow: 1px 1px 0 #000;
 }
 
-/* ===== Sparkles ===== */
+/* ===== Sparkles (Kept) ===== */
 .sparkle {
     position: absolute;
     width: 3px;
@@ -175,7 +182,7 @@ footer {
     50% { transform: translateY(-10px) scale(1.5); opacity: 0.3; }
 }
 
-/* ===== Animations ===== */
+/* ===== Animations (Kept) ===== */
 @keyframes bounce {
     0%,100% { transform: translateY(0); }
     50% { transform: translateY(-15px); }
@@ -185,12 +192,14 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== Responsive ===== */
+/* ===== Responsive (Adjusted max-width for consistency) ===== */
 @media (max-width: 768px) {
     header h1 { font-size: 3rem; }
     header p { font-size: 1.2rem; }
-    .discord-btn, .minecraft-btn { font-size: 1.4rem; padding: 0.8rem 2rem; }
     .intro { font-size: 1.4rem; line-height: 1.5; padding: 15px 20px; }
+    /* Ensure the card is still centered and full width on mobile */
+    .discord-card { max-width: 90%; margin: 0 auto; }
+    .discord-card .discord-btn { font-size: 1.4rem; padding: 0.8rem 2rem; }
 }
 </style>
 </head>
@@ -207,14 +216,6 @@ footer {
     </section>
 
     <div class="cards-container">
-        <!-- Events Card -->
-        <div id="events-card" class="events-card">
-            <h3>Events and Posts Coming Soon!!</h3>
-            <p>Stay up to date with the latest community events and posts!</p>
-            <a href="events.html" class="minecraft-btn">View Now</a>
-        </div>
-
-        <!-- Discord Card -->
         <div id="discord-card" class="discord-card">
             <h3>Discord Invite Coming Soon!!</h3>
             <p>Hop on over to Discord to chat with Pisa and other adventurers.</p>
@@ -228,7 +229,7 @@ footer {
 </footer>
 
 <script>
-// ===== Sparkles =====
+// ===== Sparkles (Kept) =====
 const sparkleCount = 50;
 for(let i=0;i<sparkleCount;i++){
     const sparkle = document.createElement('div');
